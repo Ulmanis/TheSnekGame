@@ -12,13 +12,31 @@ namespace TheSnekGame
 {
     public partial class Game : Form
     {
+        int horVelocity = 0;
+        int verVelocity = 0;
+        int step = 20;
+
         Area area = new Area();
         Snake snake = new Snake();
+        Timer mainTimer = new Timer();
 
         public Game()
         {
             InitializeComponent();
             InitializeGame();
+            InitializeTimer();
+        }
+
+        private void InitializeTimer()
+        {
+            mainTimer.Interval = 500;
+            mainTimer.Tick += new EventHandler(MainTimer_Tick);
+            mainTimer.Start();
+        }
+
+        private void MainTimer_Tick(object sender, EventArgs e)
+        {
+
         }
 
         private void InitializeGame()
@@ -29,7 +47,7 @@ namespace TheSnekGame
             area.Top = 100;
             area.Left = 100;
 
-            this.Controls.Add(snake.snakePixels[0]);
+            snake.Render(this);
         }
     }
 }
