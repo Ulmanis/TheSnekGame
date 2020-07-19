@@ -12,9 +12,6 @@ namespace TheSnekGame
 {
     public partial class Game : Form
     {
-        int horVelocity = 0;
-        int verVelocity = 0;
-        int step = 20;
 
         Area area = new Area();
         Snake snake = new Snake();
@@ -36,7 +33,7 @@ namespace TheSnekGame
 
         private void MainTimer_Tick(object sender, EventArgs e)
         {
-
+            snake.Move();
         }
 
         private void InitializeGame()
@@ -48,6 +45,44 @@ namespace TheSnekGame
             area.Left = 100;
 
             snake.Render(this);
+
+            this.KeyDown += new KeyEventHandler(Game_Keydown);
+        }
+        //Controls
+        private void Game_Keydown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.D:
+                    if (snake.HorizontalVelocity != -1)
+                    {
+                        snake.HorizontalVelocity = 1;
+                    }
+                    snake.VerticalVelocity = 0;
+                    break;
+                case Keys.A:
+                    if (snake.HorizontalVelocity != 1)
+                    {
+                        snake.HorizontalVelocity = -1;
+                    }
+                    snake.VerticalVelocity = 0;
+                    break;
+                case Keys.S:
+                    snake.HorizontalVelocity = 0;
+                    if (snake.VerticalVelocity != -1)
+                    {
+                        snake.VerticalVelocity = 1;
+                    }
+
+                    break;
+                case Keys.W:
+                    snake.HorizontalVelocity = 0;
+                    if (snake.VerticalVelocity != 1)
+                    {
+                        snake.VerticalVelocity = -1;
+                    }
+                    break;
+            }
         }
     }
 }
