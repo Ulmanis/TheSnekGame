@@ -29,7 +29,7 @@ namespace TheSnekGame
             this.AddPixel(300, 340);
         }
 
-        private void AddPixel(int left, int top)
+        public void AddPixel(int left, int top)
         {
             PictureBox snakePixel;
             snakePixel = new PictureBox();
